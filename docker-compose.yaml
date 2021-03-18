@@ -1,0 +1,15 @@
+version: "3.6"
+services:
+  local-pg:
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: app_pass
+      POSTGRES_USER: app_user
+      POSTGRES_DB: mystore
+    networks:
+      - clean-network
+
+networks:
+  clean-network:
