@@ -16,7 +16,7 @@ namespace Application.Products.Commands.CreateProduct
         public double Price { get; set; }
     }
 
-    class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Product>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Product>
     {
         
         public async Task<Product> Handle(CreateProductCommand request, CancellationToken cancellationToken)
