@@ -16,10 +16,17 @@ namespace Infrastructure.Persistence.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
             
-            /*builder.Property(t => t.Description)
+            builder.Property(t => t.Description)
                 .HasMaxLength(300)
                 .HasDefaultValue("")
-                .IsRequired();*/
+                .IsRequired();
+
+            builder.Property(t => t.Sku)
+                .HasMaxLength(40);
+
+            builder.Property(t => t.Stock)
+                .HasDefaultValue(0)
+                .IsRequired();
             
             builder.Property(t => t.Price)
                 .HasPrecision(12, 2)
