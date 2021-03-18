@@ -1,3 +1,32 @@
+# CleanStore
+
+
+## Code Coverage
+
+First, add the following dependencies to your test project
+```xml
+<ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="3.0.3" />
+    <PackageReference Include="coverlet.collector" Version="1.3.0" />
+</ItemGroup>
+```
+
+Install ReportGenerator as a global tool
+```bash
+dotnet tool install -g dotnet-reportgenerator-globaltool
+```
+
+
+Run tests and generate report in cobertura format
+```bash
+dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude="[xunit*]\*" /p:CoverletOutput="./TestResults/"
+```
+
+Use cobertura report to generate HTML report
+```bash
+reportgenerator "-reports:tests/Application.UnitTests/TestResults/coverage.cobertura.xml" "-targetdir:coverage-reports/html" -reporttypes:HTML;
+```
+
 
 ## Database Migrations
 
