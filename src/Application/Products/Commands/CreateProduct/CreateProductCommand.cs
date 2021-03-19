@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
 
@@ -18,7 +19,13 @@ namespace Application.Products.Commands.CreateProduct
 
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Product>
     {
-        
+        private readonly IApplicationDbContext _context;
+
+        public CreateProductCommandHandler(IApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public async Task<Product> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var product = new Product()
@@ -31,6 +38,9 @@ namespace Application.Products.Commands.CreateProduct
                 Brand = request.Brand,
                 Price = request.Price
             };
+
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync(cancellationToken);
             return product;
         }
     }

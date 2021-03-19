@@ -1,27 +1,35 @@
 using System;
 using System.Threading;
 using Application.Products.Commands.CreateProduct;
+using MediatR;
 using Xunit;
 
-namespace Application.UnitTests
+namespace Application.IntegrationTests
 {
     public class CreateProductTest
     {
+        private readonly IMediator _mediator;
+
+        public CreateProductTest(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
+
         [Fact]
         public async void AddProduct()
         {
             var createCommand = new CreateProductCommand()
             {
-                Name = "HyperX Alloy 60",
+                Name = "HyperX Alloy Origins Core",
                 Brand = "HyperX",
-                Price = 350,
-                Description = "Compact keyboard with 60% layout",
-                Sku = "P00EERWER234",
+                Price = 285,
+                Description = "Compact keyboard with TKL layout",
+                Sku = "P00EERWER235",
                 Stock = 50
             };
-            var commandHandler = new CreateProductCommandHandler();
 
-            var product = await commandHandler.Handle(createCommand, new CancellationToken());
+            var product = await _mediator.Send(createCommand);
+            
             
             Assert.Equal(product.Name, createCommand.Name);
         }

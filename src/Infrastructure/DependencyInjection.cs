@@ -1,3 +1,4 @@
+using Application.Common.Interfaces;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,12 +10,14 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<Persistence.ApplicationDbContext>(options =>
                 options.UseNpgsql(
                     configuration.GetConnectionString("DefaultConnection"),
-                    b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)
+                    b => b.MigrationsAssembly(typeof(Persistence.ApplicationDbContext).Assembly.FullName)
                     )
                 );
+
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<Persistence.ApplicationDbContext>());
             
             return services;
         }
