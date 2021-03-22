@@ -24,7 +24,7 @@ dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Exclude
 
 Use cobertura report to generate HTML report
 ```bash
-reportgenerator "-reports:tests/Application.UnitTests/TestResults/coverage.cobertura.xml" "-targetdir:coverage-reports/html" -reporttypes:HTML;
+reportgenerator "-reports:tests/Application.IntegrationTests/TestResults/coverage.cobertura.xml" "-targetdir:coverage-reports/html" -reporttypes:HTML;
 ```
 
 

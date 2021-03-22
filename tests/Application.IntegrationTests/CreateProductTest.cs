@@ -1,5 +1,3 @@
-using System;
-using System.Threading;
 using Application.Products.Commands.CreateProduct;
 using MediatR;
 using Xunit;
@@ -15,7 +13,7 @@ namespace Application.IntegrationTests
             _mediator = mediator;
         }
 
-        [Fact]
+        
         public async void AddProduct()
         {
             var createCommand = new CreateProductCommand()

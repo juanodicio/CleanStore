@@ -18,7 +18,7 @@ namespace Application.IntegrationTests
             
             services.AddApplication();
             services.AddInfrastructure(configuration);
-            
+            services.AddSingleton(configuration);
         }
     }
 }
