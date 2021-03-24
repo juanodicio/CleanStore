@@ -6,7 +6,16 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
+    <PropertyGroup>
+        <VSTestLogger>trx</VSTestLogger>
+        <VSTestResultsDirectory>.\</VSTestResultsDirectory>
+        <VSTestLogFileName>MyTestResults.xml</VSTestLogFileName>
+    </PropertyGroup>
+
     <ItemGroup>
+        <Content Include="appsettings.Docker.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <Content Include="appsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
