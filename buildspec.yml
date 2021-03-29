@@ -1,0 +1,36 @@
+version: 0.2
+phases:
+  
+  pre_build:
+    commands:
+      - docker-compose up test-pg
+      - |
+        dotnet test --logger 'trx;LogFileName=OdiTestResults.trx' \
+        --results-directory ./BuildReports/UnitTests \
+        /p:CollectCoverage=true \
+        /p:Threshold=60 \
+        /p:CoverletOutput=BuildReports/Coverage/  \
+        /p:CoverletOutputFormat=cobertura \
+        /p:Exclude='[xunit.*]*'
+    finally:
+      - docker-compose down
+  build:
+    commands:
+      - echo "Done"
+      
+  post_build:
+    commands:
+      
+
+reports:
+  test-run-results:
+    files:
+      - '**/*'
+    base-directory: 'BuildReports/UnitTests'
+    file-format: VisualStudioTrx
+
+  code-coverage:
+    files:
+      - 'AppTests/BuildReports/Coverage/coverage.cobertura.xml'
+      - 'BuildReports/Coverage/coverage.cobertura.xml'
+    file-format: "COBERTURAXML"
