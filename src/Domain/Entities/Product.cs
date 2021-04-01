@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -11,5 +12,7 @@ namespace Domain.Entities
         public int Stock { get; set; }
         public string Brand { get; set; }
         public double Price { get; set; }
+
+        public List<ProductImage> Images { get; set; }
     }
 }

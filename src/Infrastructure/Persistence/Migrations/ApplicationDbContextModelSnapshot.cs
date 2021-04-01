@@ -61,6 +61,46 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.ToTable("Products");
                 });
+
+            modelBuilder.Entity("Domain.Entities.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Description")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasDefaultValue("");
+
+                    b.Property<Guid?>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasMaxLength(240)
+                        .HasColumnType("character varying(240)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImage");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ProductImage", b =>
+                {
+                    b.HasOne("Domain.Entities.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Product", b =>
+                {
+                    b.Navigation("Images");
+                });
 #pragma warning restore 612, 618
         }
     }
