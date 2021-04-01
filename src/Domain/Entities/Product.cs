@@ -11,5 +11,6 @@ namespace Domain.Entities
         public int Stock { get; set; }
         public string Brand { get; set; }
         public double Price { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
